@@ -1,0 +1,11 @@
+.article-list {
+  list-style: none;
+
+  &__item {
+    text-transform: capitalize;
+    padding: 1em;
+    margin-top: 1em;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+}

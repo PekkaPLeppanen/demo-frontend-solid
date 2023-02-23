@@ -1,13 +1,23 @@
-import { render } from 'solid-js/web';
-
-import { TodoList } from './todo-list';
+import {render} from 'solid-js/web';
+import {Articles} from './articles/articles';
+import '@/index.scss';
 
 const root = document.getElementById('root');
 
 if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
-  throw new Error(
-    'Root element not found. Did you forget to add it to your index.html? Or maybe the id attribute got mispelled?',
-  );
+	throw new Error(
+		'Root element not found. Did you forget to add it to your index.html? Or maybe the id attribute got mispelled?',
+	);
 }
 
-render(() => <TodoList />, root!);
+function App() {
+	return (
+		<>
+			<main>
+				<Articles/>
+			</main>
+		</>
+	);
+}
+
+render(() => <App/>, root!);
