@@ -1,25 +1,25 @@
-async function getErrorMessage(response: Response): Promise<string> {
-	const data = await response.json().catch(() => undefined);
+async function getErrorMessage (response: Response): Promise<string> {
+  const data = await response.json().catch(() => undefined)
 
-	let errorMessage = response.statusText;
+  let errorMessage = response.statusText
 
-	if (data && data.message) {
-		errorMessage = data.message as string;
-	}
+  if (Object.hasOwn(data, 'message')) {
+    errorMessage = data.message as string
+  }
 
-	return errorMessage;
+  return errorMessage
 }
 
-async function parseResponse<TResponse>(
-	response: Response,
+async function parseResponse<TResponse> (
+  response: Response
 ): Promise<TResponse> {
-	if (!response.ok) {
-		return Promise.reject(await getErrorMessage(response));
-	}
+  if (!response.ok) {
+    return await Promise.reject(await getErrorMessage(response))
+  }
 
-	return response.json();
+  return await response.json()
 }
 
-export async function getData<TResponse>(url: string): Promise<TResponse> {
-	return fetch(url).then(parseResponse<TResponse>);
+export async function getData<TResponse> (url: string): Promise<TResponse> {
+  return await fetch(url).then(parseResponse<TResponse>)
 }
