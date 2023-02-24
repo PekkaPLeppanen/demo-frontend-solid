@@ -3,7 +3,7 @@ import {Article, getAllArticles} from '@/resources/article-provider';
 import {Suspense} from 'solid-js/web';
 import '@/articles/article-list.scss';
 
-export const Articles: Component = () => {
+export const ArticleList: Component = () => {
 
 	const [articles] = createResource(getAllArticles);
 

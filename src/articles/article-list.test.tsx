@@ -1,13 +1,13 @@
 import {render} from '@solidjs/testing-library';
-import {Articles} from '@/articles/articles';
-import {beforeEach, expect} from 'vitest';
+import {ArticleList} from '@/articles/article-list';
+import {beforeEach, afterEach, expect} from 'vitest';
 import {Article, getAllArticles} from '@/resources/article-provider';
 
 vi.mock('@/resources/article-provider');
 
 const getAllArticlesMock = vi.mocked(getAllArticles);
 
-describe('<Articles />', () => {
+describe('<ArticleList />', () => {
 
 	beforeEach(() => {
 		vi.useFakeTimers();
@@ -26,7 +26,7 @@ describe('<Articles />', () => {
 			} as unknown as Article
 		]);
 
-		const {getByText, unmount, container} = render(() => <Articles/>);
+		const {getByText, unmount, container} = render(() => <ArticleList/>);
 		expect(getByText('Latest topics')).toBeInTheDocument();
 		expect(container.innerHTML).toMatchSnapshot('loading');
 

@@ -1,5 +1,5 @@
 import {render} from 'solid-js/web';
-import {Articles} from './articles/articles';
+import {ArticleList} from './articles/article-list';
 import '@/index.scss';
 
 const root = document.getElementById('root');
@@ -14,7 +14,7 @@ function App() {
 	return (
 		<>
 			<main>
-				<Articles/>
+				<ArticleList/>
 			</main>
 		</>
 	);
