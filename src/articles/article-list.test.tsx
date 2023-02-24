@@ -1,11 +1,21 @@
 import {render} from '@solidjs/testing-library';
 import {ArticleList} from '@/articles/article-list';
-import {beforeEach, afterEach, expect} from 'vitest';
-import {Article, getAllArticles} from '@/resources/article-provider';
+import {afterEach, beforeEach, expect} from 'vitest';
+import {getAllArticles} from '@/resources/article-provider';
+import {articleResponseMock} from '@/resources/__mocks__/articles';
+import {Article, ArticleProps} from '@/articles/article';
 
 vi.mock('@/resources/article-provider');
+vi.mock('@/articles/article');
 
 const getAllArticlesMock = vi.mocked(getAllArticles);
+
+const ArticleMock = vi.mocked(Article);
+const articlePropsSpy = vi.fn();
+ArticleMock.mockImplementation((props: ArticleProps) => {
+	articlePropsSpy(props);
+	return <div data-testid="article"/>;
+});
 
 describe('<ArticleList />', () => {
 
@@ -20,11 +30,7 @@ describe('<ArticleList />', () => {
 
 	test('render', async () => {
 
-		getAllArticlesMock.mockResolvedValueOnce([
-			{
-				title: 'Foo bar'
-			} as unknown as Article
-		]);
+		getAllArticlesMock.mockResolvedValueOnce(articleResponseMock);
 
 		const {getByText, unmount, container} = render(() => <ArticleList/>);
 		expect(getByText('Latest topics')).toBeInTheDocument();
@@ -32,7 +38,8 @@ describe('<ArticleList />', () => {
 
 		await vi.advanceTimersToNextTimerAsync();
 
-		expect(getByText('Foo bar')).toBeInTheDocument();
+		expect(getByText(articleResponseMock[0].title)).toBeInTheDocument();
+		expect(getByText(articleResponseMock[1].title)).toBeInTheDocument();
 		expect(container.innerHTML).toMatchSnapshot('articles loaded');
 
 		unmount();

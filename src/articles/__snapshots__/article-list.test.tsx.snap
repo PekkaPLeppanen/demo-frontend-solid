@@ -1,5 +1,5 @@
 // Vitest Snapshot v1
 
-exports[`<ArticleList /> > render > articles loaded 1`] = `"<h1>Latest topics</h1><ul class=\\"article-list\\"><li class=\\"article-list__item\\">Foo bar</li></ul>"`;
+exports[`<ArticleList /> > render > articles loaded 1`] = `"<h1>Latest topics</h1><ul class=\\"article-list\\"><li class=\\"article-list__item\\">sunt aut facere repellat provident occaecati excepturi optio reprehenderit</li><li class=\\"article-list__item\\">qui est esse</li></ul>"`;
 
 exports[`<ArticleList /> > render > loading 1`] = `"<h1>Latest topics</h1><p>Loading...</p>"`;
