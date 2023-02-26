@@ -1,0 +1,14 @@
+.article-comment {
+  border-top: 1px solid #dddddd;
+  padding: 0.5em;
+
+  &__email {
+    color: #666;
+    font-size: 0.75em;
+  }
+
+  &__body {
+    padding: 0 0.5em;
+    font-size: 0.875em;
+  }
+}
