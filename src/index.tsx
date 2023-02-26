@@ -2,6 +2,9 @@ import { render } from 'solid-js/web'
 import { ArticleList } from './articles/article-list'
 import '@/index.scss'
 import { type JSXElement } from 'solid-js'
+import { Route, Router, Routes } from '@solidjs/router'
+import { Article } from '@/articles/article'
+import { ArticleContextProvider } from '@/articles/article-context-provider'
 
 const root = document.getElementById('root')
 
@@ -11,14 +14,23 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
   )
 }
 
-function App (): JSXElement {
+const App: JSXElement = () => {
   return (
     <>
       <main>
-        <ArticleList/>
+        <Routes>
+          <ArticleContextProvider>
+            <Route path="/" component={ArticleList}/>
+            <Route path="/article/:id" component={Article}/>
+          </ArticleContextProvider>
+        </Routes>
       </main>
     </>
   )
 }
 
-render(() => <App/>, root as HTMLElement)
+render(() => (
+  <Router>
+    <App/>
+  </Router>
+), root as HTMLElement)

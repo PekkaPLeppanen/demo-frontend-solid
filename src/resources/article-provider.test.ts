@@ -22,8 +22,13 @@ describe('ArticleProvider', () => {
   describe('#getCommentsByArticle', () => {
     it('calls api with correct URL', async () => {
       getDataMock.mockResolvedValueOnce(articleCommentsResponseMock)
-      await getArticleComments(123)
+      const response = await getArticleComments(123)
       expect(getDataMock).toBeCalledWith('https://jsonplaceholder.typicode.com/posts/123/comments')
+      expect(response).toEqual(articleCommentsResponseMock)
+    })
+    it('returns null if articleId not given', async () => {
+      expect(await getArticleComments()).toBeNull()
+      expect(getDataMock).not.toBeCalled()
     })
   })
 })

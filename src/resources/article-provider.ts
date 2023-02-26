@@ -38,7 +38,11 @@ export async function getAllArticles (): Promise<IArticle[]> {
   })
 }
 
-export async function getArticleComments (articleId: number): Promise<IArticleComment[]> {
+export async function getArticleComments (articleId?: number): Promise<IArticleComment[] | null> {
+  if (articleId === undefined) {
+    return null
+  }
+
   const comments = await getData<IArticleComment[]>(`${API_URL_ARTICLES}/${articleId}/comments`)
 
   return comments.map(comment => {
